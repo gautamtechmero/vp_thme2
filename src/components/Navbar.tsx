@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link, useLocation } from 'react-router-dom';
@@ -13,47 +13,19 @@ function isNavActive(pathname: string, target: string) {
 }
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const isHomePage = location.pathname === '/';
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    handleScroll();
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const solidNavbar = useMemo(() => !isHomePage || isScrolled, [isHomePage, isScrolled]);
 
   return (
-    <nav
-      className={`fixed w-full z-50 transition-all duration-500 ${
-        solidNavbar ? 'top-3 px-3 sm:top-4 sm:px-4' : 'top-0 py-4 sm:py-6'
-      }`}
-    >
-      <div
-        className={`max-w-7xl mx-auto transition-all duration-500 flex justify-between items-center ${
-          solidNavbar
-            ? 'bg-white/90 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-[28px] sm:rounded-full px-4 sm:px-8 py-2.5 sm:py-3 border border-slate-200/50'
-            : 'px-3 sm:px-4'
-        }`}
-      >
+    <nav className="fixed w-full z-50 transition-all duration-500 top-3 px-3 sm:top-4 sm:px-4">
+      <div className="max-w-7xl mx-auto transition-all duration-500 flex justify-between items-center bg-white/90 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-[28px] sm:rounded-full px-4 sm:px-8 py-2.5 sm:py-3 border border-slate-200/50">
         <Link to="/" className="flex items-center gap-2 sm:gap-2.5 cursor-pointer min-w-0 pr-3">
           <img
             src={siteContact.logo}
             alt="VP's Cleaning Logo"
             className="h-9 sm:h-10 md:h-12 w-auto object-contain rounded-2xl shrink-0"
           />
-          <span
-            className={`text-base min-[380px]:text-lg md:text-2xl font-display font-bold tracking-tight leading-tight ${
-              solidNavbar ? 'text-primary' : 'text-primary md:text-white md:drop-shadow-md'
-            }`}
-          >
+          <span className="text-base min-[380px]:text-lg md:text-2xl font-display font-bold tracking-tight leading-tight text-primary">
             VP's <span className="text-secondary">Cleaning</span>
           </span>
         </Link>
@@ -66,13 +38,7 @@ export default function Navbar() {
                 key={item.path}
                 to={item.path}
                 className={`relative px-5 py-2 font-bold text-sm transition-all duration-300 group ${
-                  solidNavbar
-                    ? active
-                      ? 'text-primary'
-                      : 'text-slate-600 hover:text-primary'
-                    : active
-                      ? 'text-secondary drop-shadow-md'
-                      : 'text-white/90 hover:text-white drop-shadow-md'
+                  active ? 'text-primary' : 'text-slate-600 hover:text-primary'
                 }`}
               >
                 <span className="relative z-10">{item.label}</span>
@@ -95,11 +61,7 @@ export default function Navbar() {
         </div>
 
         <button
-          className={`md:hidden p-2.5 rounded-2xl transition-all duration-300 shrink-0 ${
-            solidNavbar
-              ? 'bg-primary/5 text-primary hover:bg-primary/10'
-              : 'bg-white/10 backdrop-blur-md text-white border border-white/20'
-          }`}
+          className="md:hidden p-2.5 rounded-2xl transition-all duration-300 shrink-0 bg-primary/5 text-primary hover:bg-primary/10"
           onClick={() => setIsMobileMenuOpen((value) => !value)}
           aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
         >

@@ -12,7 +12,7 @@ export default function Hero() {
         <div className="absolute top-0 right-0 w-1/2 h-full bg-industrial-gray rounded-l-[100px] hidden lg:block" />
         <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-3xl" />
-        <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-slate-900/30 to-transparent z-[1] hidden md:block" />
+        <div className="absolute top-0 left-0 w-full h-40 hidden md:block" />
         <div className="absolute inset-0 bg-white/60 lg:hidden z-[1]" />
       </div>
 
