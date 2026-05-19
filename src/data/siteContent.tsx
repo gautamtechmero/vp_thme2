@@ -225,14 +225,6 @@ export const serviceSummaries: ServiceSummary[] = [
     path: '/services/office-cleaning',
   },
   {
-    title: 'House Cleaning',
-    description:
-      'Reliable residential cleaning delivering fresh sanitized comfortable living spaces consistently.',
-    features: ['Kitchen cleaning', 'Bathroom sanitation', 'Living space refresh'],
-    image: '/img/servicesimg/image6.png',
-    path: '/services/house-cleaning',
-  },
-  {
     title: 'Cleaning Commercial Ice Machines',
     description:
       'Removes scale and bacteria ensuring safe ice production standards for businesses.',
@@ -240,6 +232,14 @@ export const serviceSummaries: ServiceSummary[] = [
     image: '/img/servicesimg/image7.png',
     path: '/services/ice-machine-cleaning',
   },
+  {
+    title: 'House Cleaning',
+    description:
+      'Reliable residential cleaning delivering fresh sanitized comfortable living spaces consistently.',
+    features: ['Kitchen cleaning', 'Bathroom sanitation', 'Living space refresh'],
+    image: '/img/servicesimg/image6.png',
+    path: '/services/house-cleaning',
+  }
 ];
 
 export const homeContent = {
@@ -291,7 +291,7 @@ export const homeContent = {
     eyebrow: 'Our Expertise',
     title: 'Cleaning Services',
     actionLabel: 'View All Services',
-    items: serviceSummaries,
+    items: serviceSummaries.slice(0, 6),
   },
   nfpaSchedule: {
     eyebrow: 'Compliance Standards',

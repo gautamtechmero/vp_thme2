@@ -47,7 +47,7 @@ export default function Footer() {
                   </a>
                 </div>
               </li>
-              <li className="flex gap-4">
+              <li className="flex items-center gap-4">
                 <div className="bg-white/10 p-3 rounded-xl h-fit">
                   <Mail size={20} className="text-secondary" />
                 </div>
