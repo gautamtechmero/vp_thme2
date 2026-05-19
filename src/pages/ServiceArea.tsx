@@ -50,7 +50,7 @@ export default function ServiceAreaPage() {
                 className="bg-white rounded-[36px] overflow-hidden shadow-xl border border-slate-100/80 flex flex-col group h-full"
               >
 
-                <div className="p-10 flex-1 flex flex-col">
+                <div className="p-6 sm:p-8 md:p-10 flex-1 flex flex-col">
                   <h3 className="text-2xl font-display font-black text-primary mb-4 tracking-tight leading-snug">
                     {hub.name}
                   </h3>
@@ -135,7 +135,7 @@ export default function ServiceAreaPage() {
           </h2>
           <button
             onClick={() => navigate('/contact')}
-            className="px-10 py-5 bg-white text-primary font-bold uppercase tracking-widest rounded-full hover:bg-slate-900 hover:text-white transition-all transform hover:-translate-y-0.5 shadow-lg shadow-black/5"
+            className="w-full sm:w-auto px-10 py-5 bg-white text-primary font-bold uppercase tracking-widest rounded-full hover:bg-slate-900 hover:text-white transition-all transform hover:-translate-y-0.5 shadow-lg shadow-black/5"
           >
             {serviceAreaPageContent.ctaAction}
           </button>

@@ -37,11 +37,11 @@ export default function ContactPage() {
               <div>
                 <div className="text-sm font-bold uppercase tracking-widest text-white/50 mb-4">Call Us</div>
                 <div className="space-y-4">
-                  <a href={siteContact.phoneHrefs[0]} className="flex items-center gap-4 text-2xl font-display font-bold hover:text-secondary transition-colors">
+                  <a href={siteContact.phoneHrefs[0]} className="flex flex-wrap items-center gap-4 text-lg sm:text-2xl font-display font-bold hover:text-secondary transition-colors">
                     <Phone size={22} className="text-secondary" />
                     {siteContact.phones[0]}
                   </a>
-                  <a href={siteContact.phoneHrefs[1]} className="flex items-center gap-4 text-2xl font-display font-bold hover:text-secondary transition-colors">
+                  <a href={siteContact.phoneHrefs[1]} className="flex flex-wrap items-center gap-4 text-lg sm:text-2xl font-display font-bold hover:text-secondary transition-colors">
                     <Phone size={22} className="text-secondary" />
                     {siteContact.phones[1]}
                   </a>
@@ -49,7 +49,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <div className="text-sm font-bold uppercase tracking-widest text-white/50 mb-4">Email Us</div>
-                <a href={siteContact.emailHref} className="flex items-center gap-4 text-2xl font-display font-bold hover:text-secondary transition-colors">
+                <a href={siteContact.emailHref} className="flex flex-wrap items-center gap-4 text-lg sm:text-2xl font-display font-bold hover:text-secondary transition-colors break-all sm:break-normal">
                   <Mail size={22} className="text-secondary" />
                   {siteContact.email}
                 </a>

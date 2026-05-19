@@ -33,24 +33,24 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-500 ${
-        solidNavbar ? 'top-4 px-4' : 'top-0 py-6'
+        solidNavbar ? 'top-3 px-3 sm:top-4 sm:px-4' : 'top-0 py-4 sm:py-6'
       }`}
     >
       <div
         className={`max-w-7xl mx-auto transition-all duration-500 flex justify-between items-center ${
           solidNavbar
-            ? 'bg-white/90 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-full px-8 py-3 border border-slate-200/50'
-            : 'px-4'
+            ? 'bg-white/90 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-[28px] sm:rounded-full px-4 sm:px-8 py-2.5 sm:py-3 border border-slate-200/50'
+            : 'px-3 sm:px-4'
         }`}
       >
-        <Link to="/" className="flex items-center gap-2.5 cursor-pointer">
+        <Link to="/" className="flex items-center gap-2 sm:gap-2.5 cursor-pointer min-w-0 pr-3">
           <img
             src={siteContact.logo}
             alt="VP's Cleaning Logo"
-            className="h-10 md:h-12 w-auto object-contain rounded-2xl"
+            className="h-9 sm:h-10 md:h-12 w-auto object-contain rounded-2xl shrink-0"
           />
           <span
-            className={`text-xl md:text-2xl font-display font-bold tracking-tight ${
+            className={`text-base min-[380px]:text-lg md:text-2xl font-display font-bold tracking-tight leading-tight ${
               solidNavbar ? 'text-primary' : 'text-primary md:text-white md:drop-shadow-md'
             }`}
           >
@@ -95,7 +95,7 @@ export default function Navbar() {
         </div>
 
         <button
-          className={`md:hidden p-2.5 rounded-2xl transition-all duration-300 ${
+          className={`md:hidden p-2.5 rounded-2xl transition-all duration-300 shrink-0 ${
             solidNavbar
               ? 'bg-primary/5 text-primary hover:bg-primary/10'
               : 'bg-white/10 backdrop-blur-md text-white border border-white/20'

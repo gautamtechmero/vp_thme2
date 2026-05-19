@@ -20,7 +20,7 @@ export default function PageHeader({
 
   return (
     <section
-      className={`relative overflow-hidden pt-40 pb-20 lg:pt-48 lg:pb-24 ${
+      className={`relative overflow-hidden pt-32 pb-16 sm:pt-36 sm:pb-20 lg:pt-48 lg:pb-24 ${
         isPrimary ? 'bg-primary text-white' : 'bg-industrial-gray text-slate-900'
       }`}
     >
@@ -40,14 +40,14 @@ export default function PageHeader({
             {eyebrow}
           </span>
           <h1
-            className={`text-4xl md:text-6xl lg:text-7xl font-display font-extrabold leading-[1.05] mb-6 ${
+            className={`text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-extrabold leading-[1.05] mb-6 ${
               isPrimary ? 'text-white' : 'text-primary'
             }`}
           >
             {title}
           </h1>
           <p
-            className={`text-lg md:text-xl max-w-3xl leading-relaxed ${
+            className={`text-base sm:text-lg md:text-xl max-w-3xl leading-relaxed ${
               isPrimary ? 'text-white/75' : 'text-slate-600'
             }`}
           >

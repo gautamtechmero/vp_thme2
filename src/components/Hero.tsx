@@ -7,7 +7,7 @@ export default function Hero() {
   const navigate = useNavigate();
 
   return (
-    <section className="relative min-h-screen flex items-center pt-32 pb-20 lg:pt-40 overflow-hidden">
+    <section className="relative min-h-screen flex items-center pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-40 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-industrial-gray rounded-l-[100px] hidden lg:block" />
         <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -50,16 +50,16 @@ export default function Hero() {
             </div>
           ) : null}
 
-          <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-10">
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-4 mb-10">
             <button
               onClick={() => window.open(quoteRequestUrl, '_blank', 'noopener,noreferrer')}
-              className="bg-primary hover:bg-slate-800 text-white font-bold px-8 py-4 rounded-full flex items-center gap-2 transition-all shadow-xl hover:shadow-primary/20 transform hover:-translate-y-1"
+              className="w-full sm:w-auto justify-center bg-primary hover:bg-slate-800 text-white font-bold px-8 py-4 rounded-full flex items-center gap-2 transition-all shadow-xl hover:shadow-primary/20 transform hover:-translate-y-1"
             >
               {homeContent.hero.primaryAction} <ArrowRight size={20} />
             </button>
             <button
               onClick={() => navigate('/contact')}
-              className="bg-white hover:bg-slate-50 text-primary font-bold px-8 py-4 rounded-full flex items-center gap-2 border-2 border-slate-100 transition-all shadow-sm"
+              className="w-full sm:w-auto justify-center bg-white hover:bg-slate-50 text-primary font-bold px-8 py-4 rounded-full flex items-center gap-2 border-2 border-slate-100 transition-all shadow-sm"
             >
               <div className="bg-primary/10 p-1.5 rounded-full">
                 <ArrowRight size={16} />
@@ -68,7 +68,7 @@ export default function Hero() {
             </button>
           </div>
 
-          <div className="flex items-center justify-center lg:justify-start gap-8 flex-wrap">
+          <div className="flex items-center justify-center lg:justify-start gap-5 sm:gap-8 flex-wrap">
             {homeContent.hero.highlights.map((item) => (
               <div key={item} className="flex items-center gap-2">
                 <CheckCircle2 className="text-accent" size={20} />
@@ -82,13 +82,13 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="relative hidden sm:block"
+          className="relative w-full max-w-xl mx-auto lg:max-w-none"
         >
-          <div className="relative z-10 rounded-[40px] overflow-hidden shadow-2xl border-8 border-white">
+          <div className="relative z-10 rounded-[32px] sm:rounded-[40px] overflow-hidden shadow-2xl border-4 sm:border-8 border-white">
             <img
               src={homeContent.hero.image}
               alt={homeContent.hero.imageAlt}
-              className="w-full h-[400px] lg:h-[500px] object-cover"
+              className="w-full h-[280px] sm:h-[400px] lg:h-[500px] object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
           </div>
@@ -96,7 +96,7 @@ export default function Hero() {
           <motion.div
             animate={{ y: [0, -15, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute -bottom-6 -left-6 z-20 glass-card p-6 rounded-2xl flex items-center gap-4"
+            className="absolute -bottom-4 left-4 sm:-bottom-6 sm:-left-6 z-20 glass-card p-4 sm:p-6 rounded-2xl flex items-center gap-3 sm:gap-4"
           >
             <div className="bg-secondary p-3 rounded-xl">
               <CheckCircle2 className="text-primary" size={32} />
@@ -109,8 +109,8 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          <div className="absolute -top-10 -right-10 w-32 h-32 bg-secondary/20 rounded-full blur-2xl animate-pulse" />
-          <div className="absolute top-1/2 -right-4 w-20 h-20 bg-accent/20 rounded-full blur-xl" />
+          <div className="absolute -top-6 -right-6 sm:-top-10 sm:-right-10 w-24 h-24 sm:w-32 sm:h-32 bg-secondary/20 rounded-full blur-2xl animate-pulse" />
+          <div className="absolute top-1/2 right-0 sm:-right-4 w-16 h-16 sm:w-20 sm:h-20 bg-accent/20 rounded-full blur-xl" />
         </motion.div>
       </div>
 

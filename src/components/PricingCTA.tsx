@@ -26,21 +26,21 @@ export default function PricingCTA() {
             <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={() => window.open(quoteRequestUrl, '_blank', 'noopener,noreferrer')}
-                className="bg-primary text-white font-bold px-10 py-5 rounded-full hover:bg-slate-800 transition-all shadow-xl"
+                className="w-full sm:w-auto bg-primary text-white font-bold px-10 py-5 rounded-full hover:bg-slate-800 transition-all shadow-xl"
               >
                 {homeContent.homeCta.primaryAction}
               </button>
               <button
                 onClick={() => navigate('/contact')}
-                className="bg-white border-2 border-primary text-primary font-bold px-10 py-5 rounded-full hover:bg-primary hover:text-white transition-all"
+                className="w-full sm:w-auto bg-white border-2 border-primary text-primary font-bold px-10 py-5 rounded-full hover:bg-primary hover:text-white transition-all"
               >
                 {homeContent.homeCta.secondaryAction}
               </button>
             </div>
           </div>
 
-          <div className="bg-industrial-gray rounded-[40px] p-10 border-2 border-slate-100 relative">
-            <div className="absolute -top-6 right-10 bg-secondary text-primary font-bold px-6 py-2 rounded-full shadow-lg">
+          <div className="bg-industrial-gray rounded-[40px] p-6 sm:p-8 md:p-10 border-2 border-slate-100 relative">
+            <div className="absolute -top-5 right-6 sm:right-10 bg-secondary text-primary text-xs sm:text-sm font-bold px-4 sm:px-6 py-2 rounded-full shadow-lg">
               {homeContent.clientsPreview.title}
             </div>
             <h3 className="text-2xl font-bold text-primary mb-2">{homeContent.clientsPreview.title}</h3>

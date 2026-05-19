@@ -51,7 +51,7 @@ export default function Footer() {
                 <div className="bg-white/10 p-3 rounded-xl h-fit">
                   <Mail size={20} className="text-secondary" />
                 </div>
-                <a href={siteContact.emailHref} className="text-white/60 hover:text-secondary transition-colors">
+                <a href={siteContact.emailHref} className="text-white/60 hover:text-secondary transition-colors break-all sm:break-normal">
                   {siteContact.email}
                 </a>
               </li>
@@ -102,13 +102,13 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row w-full md:w-auto gap-4">
             <button
               onClick={() => window.open(quoteRequestUrl, '_blank', 'noopener,noreferrer')}
-              className="bg-secondary text-primary font-bold px-8 py-4 rounded-full hover:bg-amber-500 transition-all whitespace-nowrap"
+              className="w-full sm:w-auto bg-secondary text-primary font-bold px-8 py-4 rounded-full hover:bg-amber-500 transition-all"
             >
               Get Free Quote
             </button>
             <Link
               to="/contact"
-              className="bg-white/10 border border-white/20 rounded-full px-8 py-4 text-center whitespace-nowrap hover:border-secondary transition-colors"
+              className="w-full sm:w-auto bg-white/10 border border-white/20 rounded-full px-8 py-4 text-center hover:border-secondary transition-colors"
             >
               Contact Us
             </Link>

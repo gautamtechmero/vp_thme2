@@ -43,7 +43,7 @@ export default function OurClientsPage() {
             <div className="text-center mt-16">
               <button
                 onClick={() => setVisibleCount((count) => count + 5)}
-                className="px-10 py-4 border-2 border-primary text-primary font-bold uppercase tracking-widest rounded-full hover:bg-primary hover:text-white transition-all"
+                className="w-full sm:w-auto px-10 py-4 border-2 border-primary text-primary font-bold uppercase tracking-widest rounded-full hover:bg-primary hover:text-white transition-all"
               >
                 More Clients
               </button>
@@ -62,7 +62,7 @@ export default function OurClientsPage() {
           </h2>
           <button
             onClick={() => navigate('/contact')}
-            className="px-10 py-5 bg-white text-primary font-bold uppercase tracking-widest rounded-full hover:bg-slate-900 hover:text-white transition-all"
+            className="w-full sm:w-auto px-10 py-5 bg-white text-primary font-bold uppercase tracking-widest rounded-full hover:bg-slate-900 hover:text-white transition-all"
           >
             {ourClientsPageContent.ctaAction}
           </button>
