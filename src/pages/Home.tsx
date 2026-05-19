@@ -3,6 +3,7 @@ import About from '../components/About';
 import Blog from '../components/Blog';
 import FeaturedService from '../components/FeaturedService';
 import Hero from '../components/Hero';
+import HomeVideo from '../components/HomeVideo';
 import PageShell from '../components/PageShell';
 import PricingCTA from '../components/PricingCTA';
 import Projects from '../components/Projects';
@@ -22,6 +23,7 @@ export default function HomePage() {
       <Services />
       <FeaturedService />
       <Projects />
+      <HomeVideo />
       <TrustSection />
       <PricingCTA />
       <Blog />

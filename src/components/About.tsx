@@ -5,22 +5,27 @@ export default function About() {
   return (
     <section id="about" className="py-24 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="grid md:grid-cols-5 gap-4 mb-16">
-          <div className="md:col-span-2 bg-industrial-gray rounded-[32px] p-6 flex items-center justify-center text-center md:text-left">
-            <p className="text-sm font-bold uppercase tracking-[0.25em] leading-relaxed text-slate-500">
-              {homeContent.credibilityBar.intro}
-            </p>
-          </div>
-          {homeContent.credibilityBar.items.map((item) => (
-            <div
-              key={item}
-              className="bg-white rounded-[32px] border border-slate-100 shadow-lg px-6 py-8 flex items-center justify-center text-center"
-            >
-              <span className="text-base font-extrabold tracking-tight uppercase text-primary leading-tight">
-                {item}
-              </span>
+        <div className="rounded-[36px] overflow-hidden border border-slate-200 shadow-[0_20px_60px_rgba(15,23,42,0.08)] bg-white mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-[1.8fr_repeat(4,minmax(0,1fr))]">
+            <div className="px-6 py-8 md:px-8 md:py-10 border-b md:border-b-0 md:border-r border-slate-200 bg-industrial-gray/60 flex items-center justify-center md:justify-start text-center md:text-left min-h-[132px]">
+              <p className="text-[11px] md:text-xs font-black uppercase tracking-[0.24em] leading-relaxed text-slate-500 max-w-xs md:max-w-none">
+                {homeContent.credibilityBar.intro}
+              </p>
             </div>
-          ))}
+
+            {homeContent.credibilityBar.items.map((item, index) => (
+              <div
+                key={item}
+                className={`px-6 py-8 md:px-6 md:py-10 flex items-center justify-center text-center min-h-[132px] border-b border-slate-200 md:border-b-0 ${
+                  index !== homeContent.credibilityBar.items.length - 1 ? 'md:border-r' : ''
+                }`}
+              >
+                <span className="text-base md:text-lg font-extrabold tracking-tight uppercase text-primary leading-tight max-w-[12rem]">
+                  {item}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-16 items-center">

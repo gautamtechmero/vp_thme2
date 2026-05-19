@@ -27,14 +27,28 @@ export default function Hero() {
             <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
             {homeContent.hero.eyebrow}
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-extrabold text-primary leading-[1.1] mb-6">
-            {homeContent.hero.titleLines[0]} <br />
-            <span className="text-secondary">{homeContent.hero.accent}</span> <br />
-            {homeContent.hero.titleLines[1]}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-extrabold text-primary leading-[1.05] mb-4">
+            {homeContent.hero.title}
           </h1>
+          {homeContent.hero.subtitle ? (
+            <p className="text-xl md:text-2xl font-display font-bold text-secondary mb-5">
+              {homeContent.hero.subtitle}
+            </p>
+          ) : null}
           <p className="text-lg text-slate-600 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
             {homeContent.hero.description}
           </p>
+
+          {homeContent.hero.announcementText ? (
+            <div className="mb-8 max-w-2xl mx-auto lg:mx-0 rounded-[28px] border border-secondary/30 bg-white/90 px-5 py-4 shadow-lg shadow-slate-200/60">
+              <p className="text-[11px] font-black uppercase tracking-[0.24em] text-secondary mb-2">
+                {homeContent.hero.announcementLabel}
+              </p>
+              <p className="text-base font-semibold leading-relaxed text-primary">
+                {homeContent.hero.announcementText}
+              </p>
+            </div>
+          ) : null}
 
           <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-10">
             <button

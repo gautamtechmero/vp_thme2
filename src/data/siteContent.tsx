@@ -243,15 +243,18 @@ export const serviceSummaries: ServiceSummary[] = [
 ];
 
 export const homeContent = {
-  metaTitle: "VP's Cleaning Service | Thunder Bay's Trusted Hood Cleaning Experts",
+  metaTitle: "VP's Cleaning Service | Professional Cleaning Service Across Ontario",
   metaDescription:
-    'Keep your kitchen safe, compliant, and grease-free. Certified by NFPA 96 standards. Trusted by restaurants and industrial facilities across Thunder Bay.',
+    "Professional cleaning service based in Northwestern Ontario. VP's Cleaning Service provides elite hood cleaning, exhaust cleaning, and now commercial hood and residential HVAC installations across Ontario.",
   hero: {
-    eyebrow: "Thunder Bay's Trusted Choice",
-    titleLines: ['Trusted', 'Experts.'],
-    accent: 'Hood Cleaning',
+    eyebrow: 'Professional cleaning service',
+    title: "VP's Cleaning Service",
+    subtitle: 'Professional cleaning service',
     description:
-      'Keep your kitchen safe, compliant, and grease-free. Certified by NFPA 96 standards.',
+      "In the heart of Northwestern Ontario, we're not just cleaning hoods. We're setting the standard for excellence. Now expanding our elite services across Ontario.",
+    announcementLabel: 'NEW',
+    announcementText:
+      'Now providing commercial hood & exhaust installations and residential HVAC installations.',
     primaryAction: 'Get Free Quote',
     secondaryAction: 'Call Now',
     highlights: ['NFPA 96 Compliant', '24/7 Availability', 'Certified & Insured'],
@@ -317,6 +320,15 @@ export const homeContent = {
       before: `/img/before after/bf${value}.png`,
       after: `/img/before after/af${value}.png`,
     })),
+  },
+  featuredVideo: {
+    eyebrow: 'Live Service Footage',
+    title: 'Watch Our Team In Action',
+    description:
+      'Real hood and duct cleaning footage from the field. Use the controls to play, pause, and review the cleaning process at your own pace.',
+    src: '/img/home%20video/Hood-and-Duct-Cleaning-Foaming-Degreaser-1.mp4',
+    poster: '/img/servicesimg/hood-cleaning.png',
+    note: 'Professional hood and duct cleaning in progress',
   },
   certifications: {
     eyebrow: 'Industry Certifications',
