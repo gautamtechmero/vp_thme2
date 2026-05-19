@@ -43,15 +43,14 @@ export default function Navbar() {
             : 'px-4'
         }`}
       >
-        <Link to="/" className="flex items-center gap-3 group cursor-pointer">
-          <div className="relative">
-            <div className="bg-white p-2.5 rounded-xl shadow-lg border border-white/60 overflow-hidden">
-              <img src={siteContact.logo} alt="VP's Cleaning Logo" className="h-12 w-auto object-contain" />
-            </div>
-            <div className="absolute -inset-1 bg-secondary/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity" />
-          </div>
+        <Link to="/" className="flex items-center gap-2.5 cursor-pointer">
+          <img
+            src={siteContact.logo}
+            alt="VP's Cleaning Logo"
+            className="h-10 md:h-12 w-auto object-contain rounded-2xl"
+          />
           <span
-            className={`text-2xl font-display font-bold transition-colors tracking-tight ${
+            className={`text-xl md:text-2xl font-display font-bold tracking-tight ${
               solidNavbar ? 'text-primary' : 'text-primary md:text-white md:drop-shadow-md'
             }`}
           >
@@ -85,12 +84,7 @@ export default function Navbar() {
               </Link>
             );
           })}
-          <div className="ml-4 pl-4 border-l border-slate-200/50 h-8 flex items-center gap-3">
-            <img
-              src={siteContact.secondaryLogo}
-              alt="VP's Cleaning Secondary Logo"
-              className="h-10 w-10 rounded-full object-cover border border-slate-200 shadow-sm"
-            />
+          <div className="ml-4 pl-4 border-l border-slate-200/50 h-8 flex items-center">
             <button
               onClick={() => window.open(quoteRequestUrl, '_blank', 'noopener,noreferrer')}
               className="bg-primary hover:bg-slate-800 text-white text-xs font-black uppercase tracking-widest px-7 py-3 rounded-full transition-all shadow-xl hover:shadow-primary/20 transform hover:-translate-y-0.5 active:scale-95"

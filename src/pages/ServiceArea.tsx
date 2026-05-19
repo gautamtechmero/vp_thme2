@@ -105,7 +105,9 @@ export default function ServiceAreaPage() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.04, duration: 0.4 }}
                 whileHover={{ y: -4, boxShadow: '0 12px 40px rgba(0,0,0,0.06)' }}
-                className="bg-white rounded-full py-5 px-8 shadow-sm border border-slate-100 flex items-center justify-center gap-3 transition-all duration-300 group cursor-pointer hover:border-secondary/40"
+                className={`bg-white rounded-full py-5 px-8 shadow-sm border border-slate-100 flex items-center justify-center gap-3 transition-all duration-300 group cursor-pointer hover:border-secondary/40 ${
+                  city === 'Across Ontario' ? 'md:col-span-2 lg:col-span-3 w-full md:max-w-sm justify-self-center' : ''
+                }`}
                 onClick={() => navigate('/contact')}
               >
                 <ChevronRight

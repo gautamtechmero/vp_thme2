@@ -177,7 +177,6 @@ export const siteContact = {
   ] as SocialLink[],
   compliance: ['NFPA 96 Certified', 'Fully Insured', 'WSIB Compliant'],
   logo: '/img/logo-1.jpeg',
-  secondaryLogo: '/img/logo.webp',
   footerDescription:
     'Kitchen hood, exhaust cleaning, grease containment, and NFPA-compliant commercial kitchen maintenance in Thunder Bay.',
   copyright: "© 2026 VP's Cleaning Service. All Rights Reserved.",
@@ -376,30 +375,86 @@ export const homeContent = {
 export const aboutPageContent = {
   metaTitle: 'About Us | VP\'s Cleaning Service',
   metaDescription:
-    "Learn about VP's Cleaning Service, our mission, vision, and the certified experts dedicated to kitchen safety in Thunder Bay.",
-  eyebrow: 'Our Story',
-  title: 'Precision & Safety.',
-  paragraphs: [
-    "VP's Cleaning Service was founded with a single mission: to provide Thunder Bay with the most reliable and thorough industrial cleaning solutions available.",
-    'With over 10 years of experience, we have built a reputation for excellence, serving restaurants, hotels, and industrial facilities with a focus on fire safety and compliance.',
-  ],
-  pillars: [
-    {
-      title: 'Our Mission',
-      description:
-        'To eliminate fire hazards and ensure operational excellence for every client through meticulous cleaning and certified safety standards.',
-    },
-    {
-      title: 'Our Vision',
-      description:
-        'To be the most trusted name in industrial maintenance across Ontario, known for our precision, reliability, and technical expertise.',
-    },
-    {
-      title: 'Our Values',
-      description:
-        'Integrity, safety, and transparency. We provide detailed reports and photographic evidence of our work to ensure complete peace of mind.',
-    },
-  ],
+    "Learn how VP's Cleaning Service delivers NFPA 96-aligned hood cleaning, grease containment, and dependable service across Northwest Ontario and into the Toronto market.",
+  eyebrow: 'About VP\'s Cleaning Service',
+  title: 'Your Trusted Partner in Kitchen Hood Cleaning & Grease Containment Solutions',
+  description:
+    'Proudly based in Northwest Ontario, we deliver dependable hood cleaning, grease containment, and sanitation solutions with a growing presence across Ontario.',
+  intro: {
+    label: 'Northwest Ontario Based',
+    title: 'Built on regional trust, growing with purpose.',
+    paragraphs: [
+      'We are proudly based in Northwest Ontario, with a strong presence and deep roots in the region. As we continue to grow, we are excited to expand our operations into the dynamic Toronto market.',
+      "Founded in 2021, VP's Cleaning Services has grown into a respected industry leader by consistently delivering reliable, high-quality cleaning solutions. We specialize in kitchen exhaust and hood cleaning, rooftop grease containment, and surface sanitation, all of which meet or exceed rigorous NFPA 96 safety standards.",
+    ],
+    highlights: ['Founded in 2021', 'NFPA 96-aligned service', 'Ontario-focused growth'],
+    badgeValue: '2021',
+    badgeLabel: 'Founded',
+    image: '/img/about/about.webp',
+    imageAlt: 'VP’s Cleaning Service about page feature image',
+  },
+  associations: {
+    eyebrow: 'Industry Alignment',
+    title: 'We proudly align ourselves with top industry associations.',
+    description:
+      'Our standards and service approach are shaped by respected organizations that influence fire safety, restaurant facility maintenance, and professional washing practices.',
+    items: [
+      'National Fire Protection Association',
+      'Restaurant Facility Management Association',
+      'Power Washers of North America',
+    ],
+  },
+  reasons: {
+    eyebrow: 'Why Customers Choose Us',
+    title: 'Quality, safety, and reliability built into every visit.',
+    description:
+      "At VP's Cleaning Service, we take pride in providing top-tier cleaning solutions tailored to meet the unique needs of your business.",
+    items: [
+      {
+        icon: 'shieldCheck' as IconName,
+        title: 'Quality & Safety at Its Best',
+        description:
+          'Cleaning is more than appearance. Our team uses industry-leading techniques and equipment to keep your kitchen and facility clean, safe, hygienic, and compliant.',
+      },
+      {
+        icon: 'sparkles' as IconName,
+        title: 'No Mess Left Behind',
+        description:
+          'We work carefully and leave your space spotless so your business can keep operating smoothly without extra cleanup or disruption.',
+      },
+      {
+        icon: 'badgeCheck' as IconName,
+        title: 'Certified Cleaners',
+        description:
+          'Our fully trained professionals bring the experience, certified methods, and product knowledge needed to deliver safe, high-quality results.',
+      },
+      {
+        icon: 'calendarClock' as IconName,
+        title: 'Reliable: Automated Scheduling',
+        description:
+          'Recurring service is easy to manage with automated scheduling, helping you stay on track without the hassle of constant follow-up.',
+      },
+      {
+        icon: 'monitor' as IconName,
+        title: 'Streamlined Communication',
+        description:
+          'Need to reschedule or request something specific? Our communication process is clear and responsive, so you get prompt answers when you need them.',
+      },
+      {
+        icon: 'award' as IconName,
+        title: 'Guaranteed Satisfaction',
+        description:
+          'We stand behind our work and aim to clean to the highest standard every time. If something misses the mark, we make it right.',
+      },
+    ],
+  },
+  statement: {
+    label: 'Our Quality Promise',
+    title: 'Great Hood Cleaning Starts with Quality, Not Price.',
+    description:
+      "At VP's Cleaning Service, we prioritize quality over cost. We believe that top-notch service does not need hidden fees or compromised results. With us, you get quality cleaning and reliable service at a fair price.",
+    note: 'Quality cleaning. Fair pricing. No shortcuts.',
+  },
 };
 
 export const servicesPageContent = {
@@ -1198,4 +1253,3 @@ export const serviceAreaPageContent = {
   ctaTitle: 'Ready to book certified safety maintenance in your area?',
   ctaAction: 'Book A Service',
 };
-

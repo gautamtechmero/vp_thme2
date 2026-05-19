@@ -1,6 +1,6 @@
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { iconMap, quoteRequestUrl, siteContact } from '../data/siteContent';
+import { quoteRequestUrl, siteContact } from '../data/siteContent';
 
 export default function Footer() {
   return (
@@ -19,21 +19,6 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-white/60 leading-relaxed">{siteContact.footerDescription}</p>
-            <div className="flex items-center gap-4">
-              {siteContact.socialLinks.map((link) => {
-                const Icon = iconMap[link.icon];
-                return (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    aria-label={link.label}
-                    className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary hover:text-primary transition-all"
-                  >
-                    <Icon size={18} />
-                  </a>
-                );
-              })}
-            </div>
           </div>
 
           <div>
