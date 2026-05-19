@@ -291,7 +291,7 @@ export const homeContent = {
     eyebrow: 'Our Expertise',
     title: 'Cleaning Services',
     actionLabel: 'View All Services',
-    items: [serviceSummaries[0], serviceSummaries[1], serviceSummaries[2]],
+    items: serviceSummaries,
   },
   nfpaSchedule: {
     eyebrow: 'Compliance Standards',
