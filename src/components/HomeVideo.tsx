@@ -26,11 +26,13 @@ export default function HomeVideo() {
             <div className="relative rounded-[30px] overflow-hidden border border-primary/10 bg-slate-950">
               <video
                 className="w-full h-[280px] sm:h-[380px] lg:h-[560px] object-cover"
-                autoPlay
+                controls
+                controlsList="nodownload"
                 playsInline
                 preload="metadata"
               >
                 <source src={homeContent.featuredVideo.src} type="video/mp4" />
+                Your browser does not support the video tag.
               </video>
             </div>
           </div>
