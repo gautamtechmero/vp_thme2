@@ -258,7 +258,7 @@ export const homeContent = {
     primaryAction: 'Get Free Quote',
     secondaryAction: 'Call Now',
     highlights: ['NFPA 96 Compliant', '24/7 Availability', 'Certified & Insured'],
-    image: '/img/servicesimg/hood-cleaning.png',
+    image: '/img/servicesimg/hero.webp',
     imageAlt: 'Certified hood cleaning service',
     statValue: '10+',
     statLabel: 'Years Experience',

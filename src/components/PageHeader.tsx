@@ -20,7 +20,7 @@ export default function PageHeader({
 
   return (
     <section
-      className={`relative overflow-hidden pt-32 pb-16 sm:pt-36 sm:pb-20 lg:pt-48 lg:pb-24 ${
+      className={`relative overflow-hidden pt-48 pb-16 sm:pt-56 sm:pb-20 lg:pt-64 lg:pb-24 ${
         isPrimary ? 'bg-primary text-white' : 'bg-industrial-gray text-slate-900'
       }`}
     >

@@ -51,7 +51,7 @@ export default function FeaturedService() {
                 </div>
                 <button
                   onClick={() => navigate('/contact')}
-                  className="w-full sm:w-auto bg-secondary text-primary font-bold px-8 py-4 rounded-full hover:bg-amber-500 transition-all"
+                  className="w-full sm:w-auto bg-secondary text-primary font-bold px-8 py-4 rounded-full hover:bg-[#d5ee96] transition-all"
                 >
                   {homeContent.nfpaSchedule.ctaLabel}
                 </button>

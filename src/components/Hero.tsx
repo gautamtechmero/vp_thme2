@@ -7,16 +7,16 @@ export default function Hero() {
   const navigate = useNavigate();
 
   return (
-    <section className="relative min-h-screen flex items-center pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-40 overflow-hidden">
+    <section className="relative min-h-screen flex items-center pt-48 pb-20 sm:pt-56 sm:pb-24 lg:pt-64 lg:pb-28 overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-industrial-gray rounded-l-[100px] hidden lg:block" />
+        {/* <div className="absolute top-0 right-0 w-1/2 h-full bg-industrial-gray rounded hidden lg:block" /> */}
         <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-3xl" />
         <div className="absolute top-0 left-0 w-full h-40 hidden md:block" />
-        <div className="absolute inset-0 bg-white/60 lg:hidden z-[1]" />
+        <div className="absolute inset-0 bg-white/60 lg:hidden z-1" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 xl:px-4 grid lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-center relative z-10">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -25,7 +25,7 @@ export default function Hero() {
         >
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-bold mb-6">
             <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            {homeContent.hero.eyebrow}
+            {/* {homeContent.hero.eyebrow} */}
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-extrabold text-primary leading-[1.05] mb-4">
             {homeContent.hero.title}
@@ -114,14 +114,6 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
-        <svg className="relative block w-full h-[100px]" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path
-            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C58.05,118.5,123.5,124.5,188.5,114.6Z"
-            className="fill-white"
-          />
-        </svg>
-      </div>
     </section>
   );
 }

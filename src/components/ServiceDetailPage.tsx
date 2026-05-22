@@ -24,7 +24,7 @@ export default function ServiceDetailPage({ service }: ServiceDetailPageProps) {
         <meta name="description" content={service.metaDescription} />
       </Helmet>
 
-      <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-24 bg-industrial-gray">
+      <section className="relative overflow-hidden pt-48 pb-20 sm:pt-56 sm:pb-24 lg:pt-64 lg:pb-28 bg-industrial-gray">
         <div className="absolute inset-0 z-0">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-white/60 rounded-l-[100px] hidden lg:block" />
           <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
@@ -47,7 +47,7 @@ export default function ServiceDetailPage({ service }: ServiceDetailPageProps) {
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-8">
               <button
                 onClick={() => navigate('/contact')}
-                className="w-full sm:w-auto bg-primary text-white font-bold px-8 py-4 rounded-full hover:bg-slate-800 transition-all shadow-xl"
+                className="w-full sm:w-auto bg-secondary text-[#111827] font-bold px-8 py-4 rounded-full hover:bg-[#d5ee96] transition-all shadow-xl shadow-secondary/20"
               >
                 {service.hero.ctaLabel}
               </button>
@@ -139,7 +139,7 @@ export default function ServiceDetailPage({ service }: ServiceDetailPageProps) {
                   <p className="text-slate-600 leading-relaxed mb-8">{service.benefits.card.description}</p>
                   <button
                     onClick={() => navigate('/contact')}
-                    className="w-full sm:w-auto bg-primary text-white font-bold px-8 py-4 rounded-full hover:bg-slate-800 transition-all shadow-lg"
+                    className="w-full sm:w-auto bg-secondary text-[#111827] font-bold px-8 py-4 rounded-full hover:bg-[#d5ee96] transition-all shadow-lg shadow-secondary/20"
                   >
                     {service.benefits.card.ctaLabel}
                   </button>

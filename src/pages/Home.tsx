@@ -1,14 +1,13 @@
 import { Helmet } from 'react-helmet-async';
 import About from '../components/About';
 import Blog from '../components/Blog';
+import CompanyAbout from '../components/CompanyAbout';
 import FeaturedService from '../components/FeaturedService';
-import Hero from '../components/Hero';
-import HomeVideo from '../components/HomeVideo';
 import PageShell from '../components/PageShell';
 import PricingCTA from '../components/PricingCTA';
 import Projects from '../components/Projects';
-import Services from '../components/Services';
-import TrustSection from '../components/TrustSection';
+import VideoHero from '../components/VideoHero';
+// import Services from '../components/Services';
 import { homeContent } from '../data/siteContent';
 
 export default function HomePage() {
@@ -18,13 +17,12 @@ export default function HomePage() {
         <title>{homeContent.metaTitle}</title>
         <meta name="description" content={homeContent.metaDescription} />
       </Helmet>
-      <Hero />
+      <VideoHero />
+      <CompanyAbout />
       <About />
-      <Services />
+      {/* <Services /> */}
       <FeaturedService />
       <Projects />
-      <HomeVideo />
-      <TrustSection />
       <PricingCTA />
       <Blog />
     </PageShell>

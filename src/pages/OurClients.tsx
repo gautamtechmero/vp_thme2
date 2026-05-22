@@ -62,7 +62,7 @@ export default function OurClientsPage() {
           </h2>
           <button
             onClick={() => navigate('/contact')}
-            className="w-full sm:w-auto px-10 py-5 bg-white text-primary font-bold uppercase tracking-widest rounded-full hover:bg-slate-900 hover:text-white transition-all"
+            className="w-full sm:w-auto px-10 py-5 bg-secondary text-[#111827] font-bold uppercase tracking-widest rounded-full shadow-lg shadow-secondary/20 hover:bg-[#d5ee96] transition-all"
           >
             {ourClientsPageContent.ctaAction}
           </button>

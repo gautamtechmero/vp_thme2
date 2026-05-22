@@ -15,7 +15,7 @@ export default function Footer() {
                 <img src={siteContact.logo} alt="VP's Cleaning Logo" className="h-10 object-contain" />
               </div>
               <span className="text-2xl font-display font-bold">
-                VP's<span className="text-secondary">Cleaning</span>
+                VP's<span className="text-secondary"> Cleaning</span>
               </span>
             </div>
             <p className="text-white/60 leading-relaxed">{siteContact.footerDescription}</p>
@@ -102,7 +102,7 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row w-full md:w-auto gap-4">
             <button
               onClick={() => window.open(quoteRequestUrl, '_blank', 'noopener,noreferrer')}
-              className="w-full sm:w-auto bg-secondary text-primary font-bold px-8 py-4 rounded-full hover:bg-amber-500 transition-all"
+              className="w-full sm:w-auto bg-secondary text-primary font-bold px-8 py-4 rounded-full hover:bg-[#d5ee96] transition-all"
             >
               Get Free Quote
             </button>
