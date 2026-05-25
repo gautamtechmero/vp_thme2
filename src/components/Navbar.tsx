@@ -36,8 +36,8 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className="px-3 pt-3 sm:px-4 sm:pt-4">
-        <div className="max-w-7xl mx-auto transition-all duration-500 flex justify-between items-center bg-white/90 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-[28px] sm:rounded-[10px] px-4 sm:px-8 py-2.5 sm:py-3 border border-slate-200/50">
+      <div className="w-full">
+        <div className="w-full transition-all duration-500 flex justify-between items-center bg-white/90 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] px-4 sm:px-32 py-3 sm:py-6 border-y border-slate-200/50">
           <Link to="/" className="flex items-center gap-2 sm:gap-2.5 cursor-pointer min-w-0 pr-3">
             <img
               src={siteContact.logo}
@@ -88,25 +88,27 @@ export default function Navbar() {
           </button>
         </div>
 
-        <div className="hidden md:block w-full max-w-[96rem] mx-auto mt-2">
-          <div className="bg-white/90 backdrop-blur-xl border border-slate-200/50 shadow-[0_8px_24px_rgb(0,0,0,0.10)] rounded-[10px] px-4 py-2.5">
-            <div className="flex items-center gap-3 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-              {serviceSummaries.map((service) => {
-                const active = isNavActive(location.pathname, service.path);
-                return (
-                  <Link
-                    key={service.path}
-                    to={service.path}
-                    className={`shrink-0 rounded-md px-6 py-2.5 text-xs font-black uppercase tracking-widest transition-all ${
-                      active
-                        ? 'bg-primary text-white'
-                        : 'text-slate-600 hover:bg-primary/5 hover:text-primary'
-                    }`}
-                  >
-                    {service.title}
-                  </Link>
-                );
-              })}
+        <div className="hidden md:block w-full">
+          <div className="bg-white/90 backdrop-blur-xl border-b border-slate-200/50 shadow-[0_8px_24px_rgb(0,0,0,0.10)] px-4 py-6">
+            <div className="overflow-x-auto scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+              <div className="mx-auto flex w-max items-center gap-3">
+                {serviceSummaries.map((service) => {
+                  const active = isNavActive(location.pathname, service.path);
+                  return (
+                    <Link
+                      key={service.path}
+                      to={service.path}
+                      className={`shrink-0 rounded-md px-6 py-2.5 text-xs font-black uppercase tracking-widest transition-all ${
+                        active
+                          ? 'bg-primary text-white'
+                          : 'text-slate-600 hover:bg-primary/5 hover:text-primary'
+                      }`}
+                    >
+                      {service.title}
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
