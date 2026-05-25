@@ -12,38 +12,35 @@ const serviceMapCenter = {
   lng: -88.8,
 };
 
-const defaultServiceMapSize = {
-  width: 1280,
-  height: 640,
-};
+const serviceMapZoom = 3;
+const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY?.trim();
+const googleMapExternalUrl = `https://www.google.com/maps/@${serviceMapCenter.lat},${serviceMapCenter.lng},${serviceMapZoom}z`;
+const googleMapFallbackUrl = getGoogleServiceMapUrl(serviceMapZoom);
+const googleMapsScriptId = 'google-maps-js-api';
 
-const labelPlacementClasses = {
-  right: 'left-7 top-1/2 -translate-y-1/2',
-  left: 'right-7 top-1/2 -translate-y-1/2',
-  top: 'left-1/2 bottom-7 -translate-x-1/2',
-  bottom: 'left-1/2 top-7 -translate-x-1/2',
-};
+type GoogleMapStatus = 'loading' | 'ready' | 'missing-key' | 'error';
+
+declare global {
+  interface Window {
+    google?: any;
+    initVpsServiceMap?: () => void;
+  }
+}
 
 const serviceCityPins = [
-  { city: 'Winnipeg', province: 'Manitoba', lat: 49.8951, lng: -97.1384, label: 'right' },
-  { city: 'Kenora', province: 'Ontario', lat: 49.767, lng: -94.4894, label: 'top' },
-  { city: 'Dryden', province: 'Ontario', lat: 49.7801, lng: -92.837, label: 'right' },
-  { city: 'Fort Frances', province: 'Ontario', lat: 48.609, lng: -93.4003, label: 'bottom' },
-  { city: 'Thunder Bay', province: 'Ontario', lat: 48.3809, lng: -89.2477, label: 'bottom' },
-  { city: 'Kapuskasing', province: 'Ontario', lat: 49.4169, lng: -82.4331, label: 'top' },
-  { city: 'Timmins', province: 'Ontario', lat: 48.4758, lng: -81.3305, label: 'right' },
-  { city: 'Sault Ste Marie', province: 'Ontario', lat: 46.5219, lng: -84.3461, label: 'left' },
-  { city: 'Sudbury', province: 'Ontario', lat: 46.4917, lng: -80.993, label: 'left' },
-  { city: 'North Bay', province: 'Ontario', lat: 46.3091, lng: -79.4608, label: 'right' },
-  { city: 'Barrie', province: 'Ontario', lat: 44.3894, lng: -79.6903, label: 'left' },
-  { city: 'Hamilton', province: 'Ontario', lat: 43.2557, lng: -79.8711, label: 'left' },
+  { city: 'Winnipeg', province: 'Manitoba', lat: 49.8951, lng: -97.1384 },
+  { city: 'Kenora', province: 'Ontario', lat: 49.767, lng: -94.4894 },
+  { city: 'Dryden', province: 'Ontario', lat: 49.7801, lng: -92.837 },
+  { city: 'Fort Frances', province: 'Ontario', lat: 48.609, lng: -93.4003 },
+  { city: 'Thunder Bay', province: 'Ontario', lat: 48.3809, lng: -89.2477 },
+  { city: 'Kapuskasing', province: 'Ontario', lat: 49.4169, lng: -82.4331 },
+  { city: 'Timmins', province: 'Ontario', lat: 48.4758, lng: -81.3305 },
+  { city: 'Sault Ste Marie', province: 'Ontario', lat: 46.5219, lng: -84.3461 },
+  { city: 'Sudbury', province: 'Ontario', lat: 46.4917, lng: -80.993 },
+  { city: 'North Bay', province: 'Ontario', lat: 46.3091, lng: -79.4608 },
+  { city: 'Barrie', province: 'Ontario', lat: 44.3894, lng: -79.6903 },
+  { city: 'Hamilton', province: 'Ontario', lat: 43.2557, lng: -79.8711 },
 ] as const;
-
-function getServiceMapZoom(width: number) {
-  if (width < 640) return 4;
-  if (width < 1024) return 5;
-  return 6;
-}
 
 function getGoogleServiceMapUrl(zoom: number) {
   const params = new URLSearchParams({
@@ -57,56 +54,111 @@ function getGoogleServiceMapUrl(zoom: number) {
   return `https://maps.google.com/maps?${params.toString()}`;
 }
 
-function projectServicePin(
-  lat: number,
-  lng: number,
-  mapSize: { width: number; height: number },
-  zoom: number,
-) {
-  const point = projectMapPoint(lat, lng);
-  const center = projectMapPoint(serviceMapCenter.lat, serviceMapCenter.lng);
-  const scale = 256 * 2 ** zoom;
+let googleMapsPromise: Promise<any> | null = null;
 
-  return {
-    left: (((point.x - center.x) * scale + mapSize.width / 2) / mapSize.width) * 100,
-    top: (((point.y - center.y) * scale + mapSize.height / 2) / mapSize.height) * 100,
-  };
+function loadGoogleMapsApi(apiKey: string) {
+  if (window.google?.maps) {
+    return Promise.resolve(window.google.maps);
+  }
+
+  if (!googleMapsPromise) {
+    googleMapsPromise = new Promise((resolve, reject) => {
+      window.initVpsServiceMap = () => {
+        resolve(window.google?.maps);
+        delete window.initVpsServiceMap;
+      };
+
+      const existingScript = document.getElementById(googleMapsScriptId);
+      if (existingScript) return;
+
+      const script = document.createElement('script');
+      script.id = googleMapsScriptId;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(apiKey)}&callback=initVpsServiceMap`;
+      script.async = true;
+      script.defer = true;
+      script.onerror = () => reject(new Error('Google Maps failed to load'));
+      document.head.appendChild(script);
+    });
+  }
+
+  return googleMapsPromise;
 }
 
-function projectMapPoint(lat: number, lng: number) {
-  const sinLat = Math.sin((lat * Math.PI) / 180);
+function createServiceMarkerIcon(maps: any) {
+  const markerSvg = encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="30" viewBox="0 0 22 30"><path fill="#dc2626" stroke="#ffffff" stroke-width="1.5" d="M11 1.2c-5.1 0-9.2 4.1-9.2 9.2 0 6.9 9.2 18.4 9.2 18.4s9.2-11.5 9.2-18.4c0-5.1-4.1-9.2-9.2-9.2Z"/><circle cx="11" cy="10.4" r="3.2" fill="#ffffff"/></svg>',
+  );
 
   return {
-    x: (lng + 180) / 360,
-    y: 0.5 - Math.log((1 + sinLat) / (1 - sinLat)) / (4 * Math.PI),
+    url: `data:image/svg+xml;charset=UTF-8,${markerSvg}`,
+    scaledSize: new maps.Size(22, 30),
+    anchor: new maps.Point(11, 30),
   };
 }
 
 export default function ServiceAreaPage() {
   const navigate = useNavigate();
   const mapFrameRef = useRef<HTMLDivElement>(null);
-  const [mapSize, setMapSize] = useState(defaultServiceMapSize);
-  const mapZoom = getServiceMapZoom(mapSize.width);
-  const googleServiceMapUrl = getGoogleServiceMapUrl(mapZoom);
+  const [mapStatus, setMapStatus] = useState<GoogleMapStatus>(googleMapsApiKey ? 'loading' : 'missing-key');
 
   useEffect(() => {
     const mapFrame = mapFrameRef.current;
-    if (!mapFrame) return;
+    if (!mapFrame || !googleMapsApiKey) return;
 
-    const updateMapSize = () => {
-      const { width, height } = mapFrame.getBoundingClientRect();
+    let isMounted = true;
+    let infoWindow: any;
+    const markers: any[] = [];
 
-      if (width > 0 && height > 0) {
-        setMapSize({ width, height });
-      }
+    loadGoogleMapsApi(googleMapsApiKey)
+      .then((maps) => {
+        if (!isMounted || !maps) return;
+
+        const map = new maps.Map(mapFrame, {
+          center: serviceMapCenter,
+          zoom: serviceMapZoom,
+          gestureHandling: 'greedy',
+          fullscreenControl: true,
+          mapTypeControl: true,
+          streetViewControl: false,
+          zoomControl: true,
+        });
+        const markerIcon = createServiceMarkerIcon(maps);
+
+        infoWindow = new maps.InfoWindow({ disableAutoPan: true });
+
+        serviceCityPins.forEach((pin) => {
+          const marker = new maps.Marker({
+            position: { lat: pin.lat, lng: pin.lng },
+            map,
+            title: `${pin.city}, ${pin.province}`,
+            icon: markerIcon,
+          });
+
+          const showCityName = () => {
+            const content = document.createElement('div');
+            content.textContent = pin.city;
+            content.style.cssText = 'font-weight:700;color:#111827;padding:2px 4px;white-space:nowrap;';
+            infoWindow.setContent(content);
+            infoWindow.open({ anchor: marker, map });
+          };
+
+          marker.addListener('mouseover', showCityName);
+          marker.addListener('click', showCityName);
+          marker.addListener('mouseout', () => infoWindow.close());
+          markers.push(marker);
+        });
+
+        setMapStatus('ready');
+      })
+      .catch(() => {
+        if (isMounted) setMapStatus('error');
+      });
+
+    return () => {
+      isMounted = false;
+      markers.forEach((marker) => marker.setMap(null));
+      infoWindow?.close();
     };
-
-    updateMapSize();
-
-    const resizeObserver = new ResizeObserver(updateMapSize);
-    resizeObserver.observe(mapFrame);
-
-    return () => resizeObserver.disconnect();
   }, []);
 
   return (
@@ -200,47 +252,47 @@ export default function ServiceAreaPage() {
             transition={{ duration: 0.6 }}
             className="overflow-hidden"
           >
-            <div
-              ref={mapFrameRef}
-              className="relative min-h-[420px] overflow-hidden bg-[#dbe5d2] md:min-h-[560px]"
-            >
-              <iframe
-                title="Google map showing VPSClean service coverage across Ontario and Manitoba"
-                src={googleServiceMapUrl}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="pointer-events-none absolute inset-0 h-full w-full border-0"
-              />
+            <div className="relative min-h-[420px] overflow-hidden bg-[#dbe5d2] md:min-h-[560px]">
+              <div ref={mapFrameRef} className="absolute inset-0" />
 
-              <div className="pointer-events-none absolute inset-0 bg-primary/10" />
+              {!googleMapsApiKey && (
+                <iframe
+                  title="Google map showing VPSClean service region"
+                  src={googleMapFallbackUrl}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="absolute inset-0 h-full w-full border-0"
+                />
+              )}
 
-              {serviceCityPins.map((pin, index) => {
-                const position = projectServicePin(pin.lat, pin.lng, mapSize, mapZoom);
-                return (
-                  <motion.button
-                    key={pin.city}
-                    type="button"
-                    initial={{ opacity: 0, scale: 0.85 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.04, duration: 0.3 }}
-                    whileHover={{ scale: 1.08 }}
-                    onClick={() => navigate('/contact')}
-                    className="absolute z-30 -translate-x-1/2 -translate-y-full group"
-                    style={{ left: `${position.left}%`, top: `${position.top}%` }}
-                    aria-label={`Request service in ${pin.city}`}
-                  >
-                    <span className="relative flex h-9 w-9 items-center justify-center text-red-600 drop-shadow-[0_3px_8px_rgba(0,0,0,0.5)] transition-colors group-hover:text-red-700">
-                      <MapPin size={34} strokeWidth={3} />
-                    </span>
-                    <span
-                      className={`pointer-events-none absolute whitespace-nowrap rounded-full border border-red-500/30 bg-primary/90 px-3 py-1.5 text-[11px] font-bold text-white opacity-0 shadow-lg backdrop-blur-md transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 ${labelPlacementClasses[pin.label]}`}
-                    >
-                      {pin.city}
-                    </span>
-                  </motion.button>
-                );
-              })}
+              {mapStatus === 'loading' && (
+                <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-primary/20">
+                  <span className="rounded-full bg-primary/90 px-5 py-3 text-xs font-bold uppercase tracking-widest text-white shadow-lg">
+                    Loading map
+                  </span>
+                </div>
+              )}
+
+              {mapStatus === 'missing-key' && (
+                <div className="absolute left-4 top-4 max-w-sm rounded-2xl bg-primary/90 p-4 text-sm font-semibold leading-relaxed text-white shadow-xl">
+                  Add <span className="font-mono text-secondary">VITE_GOOGLE_MAPS_API_KEY</span> to enable synced city pins.
+                </div>
+              )}
+
+              {mapStatus === 'error' && (
+                <div className="absolute left-4 top-4 max-w-sm rounded-2xl bg-primary/90 p-4 text-sm font-semibold leading-relaxed text-white shadow-xl">
+                  Google Maps could not load. Check the API key and Maps JavaScript API access.
+                </div>
+              )}
+
+              <a
+                href={googleMapExternalUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="absolute bottom-4 right-4 z-20 rounded-full bg-white px-4 py-2 text-xs font-bold uppercase tracking-wider text-primary shadow-lg transition-colors hover:bg-secondary"
+              >
+                Open in Maps
+              </a>
             </div>
           </motion.div>
         </div>
