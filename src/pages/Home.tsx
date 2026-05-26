@@ -20,10 +20,9 @@ export default function HomePage() {
       <VideoHero />
       <CompanyAbout />
       <About />
-      {/* <Services /> */}
       <FeaturedService />
-      <Projects />
       <PricingCTA />
+      <Projects />
       <Blog />
     </PageShell>
   );

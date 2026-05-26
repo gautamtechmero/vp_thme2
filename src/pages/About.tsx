@@ -31,7 +31,7 @@ export default function AboutPage() {
               <img
                 src={aboutPageContent.intro.image}
                 alt={aboutPageContent.intro.imageAlt}
-                className="w-full h-[420px] md:h-[560px] object-cover"
+                className="w-full h-105 md:h-140 object-cover"
               />
             </motion.div>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-secondary text-primary p-6 rounded-full border-8 border-white shadow-2xl text-center w-32 h-32 flex flex-col justify-center items-center">
@@ -100,7 +100,7 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08 }}
                 whileHover={{ y: -6 }}
-                className="bg-white rounded-[32px] shadow-lg border border-slate-100 p-8"
+                className="bg-white rounded-4xl shadow-lg border border-slate-100 p-8"
               >
                 <p className="text-sm font-black uppercase tracking-[0.18em] text-primary leading-relaxed">
                   {item}

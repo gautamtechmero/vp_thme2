@@ -130,7 +130,7 @@ export default function Navbar() {
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
               className="absolute top-full left-4 right-4 mt-4 md:hidden"
             >
-              <div className="bg-white rounded-[32px] shadow-2xl border border-slate-100 overflow-hidden p-6">
+              <div className="bg-white rounded-4xl shadow-2xl border border-slate-100 overflow-hidden p-6">
                 <div className="flex flex-col gap-2">
                   {navItems.map((item, index) => {
                     const active = isNavActive(location.pathname, item.path);

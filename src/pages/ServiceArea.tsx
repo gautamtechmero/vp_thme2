@@ -2,7 +2,10 @@ import { Helmet } from 'react-helmet-async';
 import { useEffect, useState, useRef } from 'react';
 import { motion } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
-import { MapPin, Phone } from 'lucide-react';
+import L from 'leaflet';
+import type { Map as LeafletMap } from 'leaflet';
+import { MapPin, Maximize2, Phone } from 'lucide-react';
+import 'leaflet/dist/leaflet.css';
 import PageHeader from '../components/PageHeader';
 import PageShell from '../components/PageShell';
 import { serviceAreaPageContent } from '../data/siteContent';
@@ -12,20 +15,10 @@ const serviceMapCenter = {
   lng: -88.8,
 };
 
-const serviceMapZoom = 3;
-const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY?.trim();
-const googleMapExternalUrl = `https://www.google.com/maps/@${serviceMapCenter.lat},${serviceMapCenter.lng},${serviceMapZoom}z`;
-const googleMapFallbackUrl = getGoogleServiceMapUrl(serviceMapZoom);
-const googleMapsScriptId = 'google-maps-js-api';
+const serviceMapZoom = 5;
+const openStreetMapExternalUrl = `https://www.openstreetmap.org/#map=${serviceMapZoom}/${serviceMapCenter.lat}/${serviceMapCenter.lng}`;
 
-type GoogleMapStatus = 'loading' | 'ready' | 'missing-key' | 'error';
-
-declare global {
-  interface Window {
-    google?: any;
-    initVpsServiceMap?: () => void;
-  }
-}
+type ServiceMapStatus = 'loading' | 'ready' | 'error';
 
 const serviceCityPins = [
   { city: 'Winnipeg', province: 'Manitoba', lat: 49.8951, lng: -97.1384 },
@@ -42,124 +35,122 @@ const serviceCityPins = [
   { city: 'Hamilton', province: 'Ontario', lat: 43.2557, lng: -79.8711 },
 ] as const;
 
-function getGoogleServiceMapUrl(zoom: number) {
-  const params = new URLSearchParams({
-    ll: `${serviceMapCenter.lat},${serviceMapCenter.lng}`,
-    z: `${zoom}`,
-    t: 'm',
-    hl: 'en',
-    output: 'embed',
+function createServiceMarkerIcon() {
+  return L.divIcon({
+    className: 'vps-service-map-marker',
+    html: '<svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="22" height="30" viewBox="0 0 22 30"><path fill="#dc2626" stroke="#ffffff" stroke-width="1.5" d="M11 1.2c-5.1 0-9.2 4.1-9.2 9.2 0 6.9 9.2 18.4 9.2 18.4s9.2-11.5 9.2-18.4c0-5.1-4.1-9.2-9.2-9.2Z"/><circle cx="11" cy="10.4" r="3.2" fill="#ffffff"/></svg>',
+    iconSize: [22, 30],
+    iconAnchor: [11, 30],
+    popupAnchor: [0, -30],
+    tooltipAnchor: [0, -30],
   });
-
-  return `https://maps.google.com/maps?${params.toString()}`;
-}
-
-let googleMapsPromise: Promise<any> | null = null;
-
-function loadGoogleMapsApi(apiKey: string) {
-  if (window.google?.maps) {
-    return Promise.resolve(window.google.maps);
-  }
-
-  if (!googleMapsPromise) {
-    googleMapsPromise = new Promise((resolve, reject) => {
-      window.initVpsServiceMap = () => {
-        resolve(window.google?.maps);
-        delete window.initVpsServiceMap;
-      };
-
-      const existingScript = document.getElementById(googleMapsScriptId);
-      if (existingScript) return;
-
-      const script = document.createElement('script');
-      script.id = googleMapsScriptId;
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(apiKey)}&callback=initVpsServiceMap`;
-      script.async = true;
-      script.defer = true;
-      script.onerror = () => reject(new Error('Google Maps failed to load'));
-      document.head.appendChild(script);
-    });
-  }
-
-  return googleMapsPromise;
-}
-
-function createServiceMarkerIcon(maps: any) {
-  const markerSvg = encodeURIComponent(
-    '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="30" viewBox="0 0 22 30"><path fill="#dc2626" stroke="#ffffff" stroke-width="1.5" d="M11 1.2c-5.1 0-9.2 4.1-9.2 9.2 0 6.9 9.2 18.4 9.2 18.4s9.2-11.5 9.2-18.4c0-5.1-4.1-9.2-9.2-9.2Z"/><circle cx="11" cy="10.4" r="3.2" fill="#ffffff"/></svg>',
-  );
-
-  return {
-    url: `data:image/svg+xml;charset=UTF-8,${markerSvg}`,
-    scaledSize: new maps.Size(22, 30),
-    anchor: new maps.Point(11, 30),
-  };
 }
 
 export default function ServiceAreaPage() {
   const navigate = useNavigate();
   const mapFrameRef = useRef<HTMLDivElement>(null);
-  const [mapStatus, setMapStatus] = useState<GoogleMapStatus>(googleMapsApiKey ? 'loading' : 'missing-key');
+  const mapShellRef = useRef<HTMLDivElement>(null);
+  const leafletMapRef = useRef<LeafletMap | null>(null);
+  const [mapStatus, setMapStatus] = useState<ServiceMapStatus>('loading');
 
   useEffect(() => {
     const mapFrame = mapFrameRef.current;
-    if (!mapFrame || !googleMapsApiKey) return;
+    if (!mapFrame) return;
 
     let isMounted = true;
-    let infoWindow: any;
-    const markers: any[] = [];
+    setMapStatus('loading');
 
-    loadGoogleMapsApi(googleMapsApiKey)
-      .then((maps) => {
-        if (!isMounted || !maps) return;
+    const map = L.map(mapFrame, {
+      center: [serviceMapCenter.lat, serviceMapCenter.lng],
+      zoom: serviceMapZoom,
+      zoomControl: true,
+      scrollWheelZoom: true,
+    });
+    leafletMapRef.current = map;
 
-        const map = new maps.Map(mapFrame, {
-          center: serviceMapCenter,
-          zoom: serviceMapZoom,
-          gestureHandling: 'greedy',
-          fullscreenControl: true,
-          mapTypeControl: true,
-          streetViewControl: false,
-          zoomControl: true,
-        });
-        const markerIcon = createServiceMarkerIcon(maps);
+    const streetTiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors',
+    });
+    const humanitarianTiles = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors, Tiles style by HOT',
+    });
+    const handleTileError = () => {
+      if (isMounted) setMapStatus('error');
+    };
 
-        infoWindow = new maps.InfoWindow({ disableAutoPan: true });
+    streetTiles.on('tileerror', handleTileError);
+    humanitarianTiles.on('tileerror', handleTileError);
+    streetTiles.addTo(map);
 
-        serviceCityPins.forEach((pin) => {
-          const marker = new maps.Marker({
-            position: { lat: pin.lat, lng: pin.lng },
-            map,
-            title: `${pin.city}, ${pin.province}`,
-            icon: markerIcon,
-          });
+    L.control
+      .layers(
+        {
+          'Street map': streetTiles,
+          'Humanitarian map': humanitarianTiles,
+        },
+        undefined,
+        { collapsed: true, position: 'topright' },
+      )
+      .addTo(map);
+    L.control.scale({ imperial: false, position: 'bottomleft' }).addTo(map);
 
-          const showCityName = () => {
-            const content = document.createElement('div');
-            content.textContent = pin.city;
-            content.style.cssText = 'font-weight:700;color:#111827;padding:2px 4px;white-space:nowrap;';
-            infoWindow.setContent(content);
-            infoWindow.open({ anchor: marker, map });
-          };
+    const markerIcon = createServiceMarkerIcon();
+    const markerBounds = L.latLngBounds(
+      serviceCityPins.map((pin) => [pin.lat, pin.lng] as [number, number]),
+    );
 
-          marker.addListener('mouseover', showCityName);
-          marker.addListener('click', showCityName);
-          marker.addListener('mouseout', () => infoWindow.close());
-          markers.push(marker);
-        });
+    serviceCityPins.forEach((pin) => {
+      const marker = L.marker([pin.lat, pin.lng], {
+        icon: markerIcon,
+        riseOnHover: true,
+        title: `${pin.city}, ${pin.province}`,
+      }).addTo(map);
 
-        setMapStatus('ready');
-      })
-      .catch(() => {
-        if (isMounted) setMapStatus('error');
+      marker.bindTooltip(pin.city, {
+        direction: 'top',
+        offset: L.point(0, -30),
+        opacity: 1,
+        className: 'vps-service-map-tooltip',
       });
+      marker.on('click', () => marker.openTooltip());
+    });
+
+    map.fitBounds(markerBounds, {
+      padding: [44, 44],
+      maxZoom: serviceMapZoom,
+    });
+    map.whenReady(() => {
+      if (isMounted) setMapStatus('ready');
+    });
 
     return () => {
       isMounted = false;
-      markers.forEach((marker) => marker.setMap(null));
-      infoWindow?.close();
+      leafletMapRef.current = null;
+      map.remove();
     };
   }, []);
+
+  const openMapFullscreen = () => {
+    const mapShell = mapShellRef.current;
+    if (!mapShell) return;
+
+    if (document.fullscreenElement === mapShell) {
+      document
+        .exitFullscreen()
+        .then(() => leafletMapRef.current?.invalidateSize())
+        .catch(() => undefined);
+      return;
+    }
+
+    if (!mapShell.requestFullscreen) return;
+
+    mapShell
+      .requestFullscreen()
+      .then(() => leafletMapRef.current?.invalidateSize())
+      .catch(() => undefined);
+  };
 
   return (
     <PageShell>
@@ -252,46 +243,47 @@ export default function ServiceAreaPage() {
             transition={{ duration: 0.6 }}
             className="overflow-hidden"
           >
-            <div className="relative min-h-[420px] overflow-hidden bg-[#dbe5d2] md:min-h-[560px]">
-              <div ref={mapFrameRef} className="absolute inset-0" />
-
-              {!googleMapsApiKey && (
-                <iframe
-                  title="Google map showing VPSClean service region"
-                  src={googleMapFallbackUrl}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="absolute inset-0 h-full w-full border-0"
-                />
-              )}
+            <div
+              ref={mapShellRef}
+              className="relative min-h-[420px] overflow-hidden bg-[#dbe5d2] md:min-h-[560px]"
+            >
+              <div
+                ref={mapFrameRef}
+                className="absolute inset-0 z-0"
+                aria-label="OpenStreetMap showing VPSClean service region"
+              />
 
               {mapStatus === 'loading' && (
-                <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-primary/20">
+                <div className="pointer-events-none absolute inset-0 z-[1000] flex items-center justify-center bg-primary/20">
                   <span className="rounded-full bg-primary/90 px-5 py-3 text-xs font-bold uppercase tracking-widest text-white shadow-lg">
                     Loading map
                   </span>
                 </div>
               )}
 
-              {mapStatus === 'missing-key' && (
-                <div className="absolute left-4 top-4 max-w-sm rounded-2xl bg-primary/90 p-4 text-sm font-semibold leading-relaxed text-white shadow-xl">
-                  Add <span className="font-mono text-secondary">VITE_GOOGLE_MAPS_API_KEY</span> to enable synced city pins.
+              {mapStatus === 'error' && (
+                <div className="absolute left-4 top-4 z-[1000] max-w-sm rounded-2xl bg-primary/90 p-4 text-sm font-semibold leading-relaxed text-white shadow-xl">
+                  OpenStreetMap tiles could not load. Check the network connection and try again.
                 </div>
               )}
 
-              {mapStatus === 'error' && (
-                <div className="absolute left-4 top-4 max-w-sm rounded-2xl bg-primary/90 p-4 text-sm font-semibold leading-relaxed text-white shadow-xl">
-                  Google Maps could not load. Check the API key and Maps JavaScript API access.
-                </div>
-              )}
+              <button
+                type="button"
+                onClick={openMapFullscreen}
+                title="View fullscreen"
+                aria-label="View service area map fullscreen"
+                className="absolute right-4 top-16 z-[1000] flex h-10 w-10 items-center justify-center rounded-full bg-white text-primary shadow-lg transition-colors hover:bg-secondary"
+              >
+                <Maximize2 size={18} />
+              </button>
 
               <a
-                href={googleMapExternalUrl}
+                href={openStreetMapExternalUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="absolute bottom-4 right-4 z-20 rounded-full bg-white px-4 py-2 text-xs font-bold uppercase tracking-wider text-primary shadow-lg transition-colors hover:bg-secondary"
+                className="absolute bottom-4 right-4 z-[1000] rounded-full bg-white px-4 py-2 text-xs font-bold uppercase tracking-wider text-primary shadow-lg transition-colors hover:bg-secondary"
               >
-                Open in Maps
+                Open in OpenStreetMap
               </a>
             </div>
           </motion.div>

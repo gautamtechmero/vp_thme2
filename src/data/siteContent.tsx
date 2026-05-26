@@ -225,12 +225,13 @@ export const serviceSummaries: ServiceSummary[] = [
     path: '/services/office-cleaning',
   },
   {
-    title: 'Cleaning Commercial Ice Machines',
+    title: 'Cleaning Commercial Ice Machines (Coming soon...)',
     description:
       'Removes scale and bacteria ensuring safe ice production standards for businesses.',
     features: ['Scale removal', 'Sanitization process', 'Health compliance'],
     image: '/img/servicesimg/image7.png',
-    path: '/services/ice-machine-cleaning',
+    path: '#'
+    // path: '/services/ice-machine-cleaning',
   },
   {
     title: 'House Cleaning',

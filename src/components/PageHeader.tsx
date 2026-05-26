@@ -25,7 +25,7 @@ export default function PageHeader({
       }`}
     >
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-white/5 rounded-l-[100px] hidden lg:block" />
+        {/* <div className="absolute top-0 right-0 w-1/2 h-full bg-white/5 rounded-l-[0px] hidden lg:block" /> */}
         <div className="absolute -top-24 -left-24 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-64 h-64 bg-secondary/10 rounded-full blur-3xl" />
       </div>
