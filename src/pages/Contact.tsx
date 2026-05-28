@@ -23,14 +23,14 @@ export default function ContactPage() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-[1.2fr_0.8fr] gap-10 items-start">
           <div className="bg-white rounded-[40px] shadow-xl border border-slate-100 p-8 md:p-12">
-            <div className="text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-8">
+            <div className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-8">
               {contactPageContent.formTitle}
             </div>
             <ContactForm />
           </div>
 
           <div className="bg-primary rounded-[40px] shadow-xl p-8 md:p-12 text-white">
-            <div className="text-[11px] font-bold uppercase tracking-widest text-secondary mb-8">
+            <div className="text-xs font-bold uppercase tracking-widest text-secondary mb-8">
               {contactPageContent.infoTitle}
             </div>
             <div className="space-y-10">

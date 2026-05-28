@@ -36,7 +36,7 @@ export default function AboutPage() {
             </motion.div>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-secondary text-primary p-6 rounded-full border-8 border-white shadow-2xl text-center w-32 h-32 flex flex-col justify-center items-center">
               <span className="text-3xl font-bold">{aboutPageContent.intro.badgeValue}</span>
-              <span className="text-[10px] font-bold uppercase tracking-[0.24em] pl-[0.24em]">
+              <span className="text-xs font-bold uppercase tracking-[0.24em] pl-[0.24em]">
                 {aboutPageContent.intro.badgeLabel}
               </span>
             </div>
@@ -168,7 +168,7 @@ export default function AboutPage() {
               <div className="w-14 h-14 rounded-2xl bg-secondary/15 text-primary flex items-center justify-center mb-6">
                 <Quote size={24} />
               </div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-secondary mb-4">
+              <p className="text-xs font-bold uppercase tracking-[0.28em] text-secondary mb-4">
                 {aboutPageContent.statement.label}
               </p>
               <h2 className="text-4xl md:text-5xl font-display font-extrabold text-primary mb-6 leading-tight">
@@ -178,7 +178,7 @@ export default function AboutPage() {
                 {aboutPageContent.statement.description}
               </p>
               <div className="mt-8 rounded-[28px] bg-industrial-gray/70 border border-slate-100 px-5 py-4">
-                <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-secondary mb-1">
+                <p className="text-xs font-bold uppercase tracking-[0.24em] text-secondary mb-1">
                   VP's Cleaning Service
                 </p>
                 <p className="text-sm font-semibold text-primary">{aboutPageContent.statement.note}</p>

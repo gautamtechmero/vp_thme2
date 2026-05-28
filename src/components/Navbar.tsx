@@ -19,7 +19,7 @@ export default function Navbar() {
   return (
     <nav className="fixed w-full z-50 transition-all duration-500 top-0">
       <div className="w-full bg-primary/95 backdrop-blur-xl border-b border-white/10 px-4 py-2.5 text-white">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-2 text-center text-xs font-bold uppercase tracking-widest sm:flex-row sm:text-sm">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-2 text-center text-sm font-bold uppercase tracking-widest sm:flex-row sm:text-base">
           <span className="text-white/70">Call us at</span>
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
             {siteContact.phones.map((phone, index) => (
@@ -28,7 +28,7 @@ export default function Navbar() {
                 href={siteContact.phoneHrefs[index]}
                 className="inline-flex items-center gap-2 hover:text-secondary transition-colors"
               >
-                <Phone size={15} className="text-secondary" />
+                <Phone size={17} className="text-secondary" />
                 <span>{phone}</span>
               </a>
             ))}
@@ -44,7 +44,7 @@ export default function Navbar() {
               alt="VP's Cleaning Logo"
               className="h-9 sm:h-10 md:h-12 w-auto object-contain rounded-2xl shrink-0"
             />
-            <span className="text-base min-[380px]:text-lg md:text-2xl font-display font-bold tracking-tight leading-tight text-primary">
+            <span className="text-lg min-[380px]:text-xl md:text-3xl font-display font-bold tracking-tight leading-tight text-primary">
               VP's <span className="text-secondary">Cleaning</span>
             </span>
           </Link>
@@ -56,7 +56,7 @@ export default function Navbar() {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`relative px-5 py-2 font-bold text-sm transition-all duration-300 group ${
+                  className={`relative px-5 py-2 font-bold text-base transition-all duration-300 group ${
                     active ? 'text-primary' : 'text-slate-600 hover:text-primary'
                   }`}
                 >
@@ -72,7 +72,7 @@ export default function Navbar() {
             <div className="ml-4 pl-4 border-l border-slate-200/50 h-8 flex items-center">
               <button
                 onClick={() => window.open(quoteRequestUrl, '_blank', 'noopener,noreferrer')}
-                className="bg-primary hover:bg-slate-800 text-white text-xs font-black uppercase tracking-widest px-7 py-3 rounded-full transition-all shadow-xl hover:shadow-primary/20 transform hover:-translate-y-0.5 active:scale-95"
+                className="bg-primary hover:bg-slate-800 text-white text-sm font-black uppercase tracking-widest px-7 py-3 rounded-full transition-all shadow-xl hover:shadow-primary/20 transform hover:-translate-y-0.5 active:scale-95"
               >
                 Get Free Quote
               </button>
@@ -98,7 +98,7 @@ export default function Navbar() {
                     <Link
                       key={service.path}
                       to={service.path}
-                      className={`shrink-0 rounded-md px-6 py-2.5 text-xs font-black uppercase tracking-widest transition-all ${
+                      className={`shrink-0 rounded-md px-6 py-2.5 text-sm font-black uppercase tracking-widest transition-all ${
                         active
                           ? 'bg-primary text-white'
                           : 'text-slate-600 hover:bg-primary/5 hover:text-primary'
@@ -159,7 +159,7 @@ export default function Navbar() {
                     );
                   })}
                   <div className="mt-4 pt-4 border-t border-slate-100">
-                    <div className="text-[11px] font-black uppercase tracking-widest text-slate-400 px-4 mb-3">
+                    <div className="text-xs font-black uppercase tracking-widest text-slate-400 px-4 mb-3">
                       Services
                     </div>
                     <div className="flex flex-col gap-1">

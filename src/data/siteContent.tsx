@@ -224,15 +224,15 @@ export const serviceSummaries: ServiceSummary[] = [
     image: '/img/servicesimg/image5.png',
     path: '/services/office-cleaning',
   },
-  {
-    title: 'Cleaning Commercial Ice Machines (Coming soon...)',
-    description:
-      'Removes scale and bacteria ensuring safe ice production standards for businesses.',
-    features: ['Scale removal', 'Sanitization process', 'Health compliance'],
-    image: '/img/servicesimg/image7.png',
-    path: '#'
-    // path: '/services/ice-machine-cleaning',
-  },
+  // {
+  //   title: 'Cleaning Commercial Ice Machines (Coming soon...)',
+  //   description:
+  //     'Removes scale and bacteria ensuring safe ice production standards for businesses.',
+  //   features: ['Scale removal', 'Sanitization process', 'Health compliance'],
+  //   image: '/img/servicesimg/image7.png',
+  //   path: '#'
+  //   // path: '/services/ice-machine-cleaning',
+  // },
   {
     title: 'House Cleaning',
     description:

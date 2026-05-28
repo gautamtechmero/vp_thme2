@@ -12,7 +12,7 @@ export default function TrustSection() {
             <SectionHeading
               eyebrow={homeContent.certifications.eyebrow}
               title={homeContent.certifications.title}
-              description={(homeContent.certifications as any).description}
+              description={(homeContent.certifications as { description?: string }).description}
               align="left"
               className="mb-10"
             />

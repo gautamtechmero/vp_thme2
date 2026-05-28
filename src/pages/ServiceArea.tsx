@@ -293,7 +293,7 @@ export default function ServiceAreaPage() {
       {/* CTA Section */}
       <section className="py-24 bg-secondary text-primary">
         <div className="max-w-5xl mx-auto px-4 text-center">
-          <div className="text-[11px] font-bold uppercase tracking-widest mb-6">
+          <div className="text-xs font-bold uppercase tracking-widest mb-6">
             {serviceAreaPageContent.ctaEyebrow}
           </div>
           <h2 className="text-4xl md:text-6xl font-display font-extrabold mb-10 leading-tight">

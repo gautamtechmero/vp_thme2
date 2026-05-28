@@ -15,7 +15,7 @@ export default function Services() {
           <SectionHeading
             eyebrow={homeContent.servicesPreview.eyebrow}
             title={homeContent.servicesPreview.title}
-            description={(homeContent.servicesPreview as any).description}
+            description={(homeContent.servicesPreview as { description?: string }).description}
             align="left"
             className="mb-0"
           />

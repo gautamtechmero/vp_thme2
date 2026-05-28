@@ -25,7 +25,7 @@ export default function OurClientsPage() {
 
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-12 text-center">
+          <div className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-12 text-center">
             {ourClientsPageContent.gridEyebrow}
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-10 items-center justify-items-center">
@@ -54,7 +54,7 @@ export default function OurClientsPage() {
 
       <section className="py-24 bg-secondary text-primary">
         <div className="max-w-5xl mx-auto px-4 text-center">
-          <div className="text-[11px] font-bold uppercase tracking-widest mb-6">
+          <div className="text-xs font-bold uppercase tracking-widest mb-6">
             {ourClientsPageContent.ctaEyebrow}
           </div>
           <h2 className="text-4xl md:text-6xl font-display font-extrabold mb-10">

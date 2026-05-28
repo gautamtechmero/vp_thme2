@@ -5,7 +5,7 @@ import { iconMap, siteContact } from '../data/siteContent';
 export default function TopBar() {
   return (
     <div className="bg-slate-900 text-white h-11 flex items-center px-4 hidden md:block relative z-50 border-b border-white/5">
-      <div className="max-w-7xl mx-auto w-full flex justify-between items-center text-[13px] font-medium gap-6">
+      <div className="max-w-7xl mx-auto w-full flex justify-between items-center text-sm font-medium gap-6">
         <div className="flex items-center gap-6 min-w-0">
           <div className="flex items-center gap-2 text-secondary animate-pulse shrink-0">
             <div className="w-2 h-2 bg-secondary rounded-full" />
@@ -46,7 +46,7 @@ export default function TopBar() {
           </div>
           <Link
             to="/contact"
-            className="hover:text-secondary transition-colors font-bold uppercase tracking-widest text-[11px]"
+            className="hover:text-secondary transition-colors font-bold uppercase tracking-widest text-xs"
           >
             {siteContact.requestServiceLabel}
           </Link>

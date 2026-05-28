@@ -91,7 +91,7 @@ export default function ContactForm() {
     <form className="space-y-8" onSubmit={handleSubmit}>
       <div className="grid md:grid-cols-2 gap-6">
         <label className="block">
-          <span className="text-[11px] font-bold uppercase tracking-widest text-slate-400 block mb-3">
+          <span className="text-xs font-bold uppercase tracking-widest text-slate-400 block mb-3">
             {contactPageContent.form.labels.name}
           </span>
           <input
@@ -103,7 +103,7 @@ export default function ContactForm() {
           />
         </label>
         <label className="block">
-          <span className="text-[11px] font-bold uppercase tracking-widest text-slate-400 block mb-3">
+          <span className="text-xs font-bold uppercase tracking-widest text-slate-400 block mb-3">
             {contactPageContent.form.labels.email}
           </span>
           <input
@@ -116,7 +116,7 @@ export default function ContactForm() {
         </label>
       </div>
       <label className="block">
-        <span className="text-[11px] font-bold uppercase tracking-widest text-slate-400 block mb-3">
+        <span className="text-xs font-bold uppercase tracking-widest text-slate-400 block mb-3">
           {contactPageContent.form.labels.phone}
         </span>
         <input
@@ -127,7 +127,7 @@ export default function ContactForm() {
         />
       </label>
       <label className="block">
-        <span className="text-[11px] font-bold uppercase tracking-widest text-slate-400 block mb-3">
+        <span className="text-xs font-bold uppercase tracking-widest text-slate-400 block mb-3">
           {contactPageContent.form.labels.service}
         </span>
         <select
@@ -143,7 +143,7 @@ export default function ContactForm() {
         </select>
       </label>
       <label className="block">
-        <span className="text-[11px] font-bold uppercase tracking-widest text-slate-400 block mb-3">
+        <span className="text-xs font-bold uppercase tracking-widest text-slate-400 block mb-3">
           {contactPageContent.form.labels.message}
         </span>
         <textarea
@@ -157,7 +157,7 @@ export default function ContactForm() {
       <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
 
       <div className="rounded-[28px] border border-slate-200 bg-industrial-gray p-6">
-        <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-4">
+        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">
           <ShieldCheck size={14} className="text-secondary" />
           {contactPageContent.form.labels.security}
         </div>

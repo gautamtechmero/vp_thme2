@@ -20,7 +20,7 @@ export default function About() {
               {homeContent.whyChooseUs.title}
             </h2>
             <p className="text-slate-600 mb-8 leading-relaxed">
-              {(homeContent.whyChooseUs as any).description}
+              {(homeContent.whyChooseUs as { description?: string }).description}
             </p>
 
             <div className="grid sm:grid-cols-2 gap-6 mb-10 text-left">

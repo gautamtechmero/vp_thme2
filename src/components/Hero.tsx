@@ -35,13 +35,15 @@ export default function Hero() {
               {homeContent.hero.subtitle}
             </p>
           ) : null}
-          <p className="text-lg text-slate-600 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-            {homeContent.hero.description}
-          </p>
+          <div className="mb-8 max-w-2xl mx-auto lg:mx-0 rounded-[28px] border border-secondary/45 bg-primary/65 px-5 py-4 shadow-2xl backdrop-blur-md sm:px-8 sm:py-5">
+            <p className="text-lg font-semibold leading-relaxed text-white">
+              {homeContent.hero.description}
+            </p>
+          </div>
 
           {homeContent.hero.announcementText ? (
             <div className="mb-8 max-w-2xl mx-auto lg:mx-0 rounded-[28px] border border-secondary/30 bg-white/90 px-5 py-4 shadow-lg shadow-slate-200/60">
-              <p className="text-[11px] font-black uppercase tracking-[0.24em] text-secondary mb-2">
+              <p className="text-xs font-black uppercase tracking-[0.24em] text-secondary mb-2">
                 {homeContent.hero.announcementLabel}
               </p>
               <p className="text-base font-semibold leading-relaxed text-primary">

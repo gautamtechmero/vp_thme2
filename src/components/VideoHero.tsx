@@ -43,13 +43,15 @@ export default function VideoHero() {
             </p>
           ) : null}
 
-          <p className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-white/78 sm:text-lg">
-            {homeContent.hero.description}
-          </p>
+          <div className="mx-auto mb-8 max-w-3xl rounded-[28px] border border-secondary/45 bg-primary/65 px-5 py-4 shadow-2xl backdrop-blur-md sm:px-8 sm:py-5">
+            <p className="text-base font-semibold leading-relaxed text-white sm:text-lg">
+              {homeContent.hero.description}
+            </p>
+          </div>
 
           {homeContent.hero.announcementText ? (
             <div className="mb-8 max-w-2xl rounded-[28px] border border-secondary/30 bg-primary/60 px-5 py-4 shadow-2xl backdrop-blur-md">
-              <p className="mb-2 text-[11px] font-black uppercase tracking-[0.24em] text-secondary">
+              <p className="mb-2 text-xs font-black uppercase tracking-[0.24em] text-secondary">
                 {homeContent.hero.announcementLabel}
               </p>
               <p className="text-base font-semibold leading-relaxed text-white">
