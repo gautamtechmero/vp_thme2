@@ -86,13 +86,13 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.2 }}
           className="relative w-full max-w-xl mx-auto lg:max-w-none"
         >
-          <div className="relative z-10 rounded-[32px] sm:rounded-[40px] overflow-hidden shadow-2xl border-4 sm:border-8 border-white">
+          <div className="relative z-10 rounded-4xl sm:rounded-[40px] overflow-hidden shadow-2xl border-4 sm:border-8 border-white">
             <img
               src={homeContent.hero.image}
               alt={homeContent.hero.imageAlt}
-              className="w-full h-[280px] sm:h-[400px] lg:h-[500px] object-cover"
+              className="w-full h-70 sm:h-100 lg:h-125 object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-primary/40 to-transparent" />
           </div>
 
           <motion.div
