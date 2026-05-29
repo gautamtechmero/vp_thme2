@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Menu, Phone, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link, useLocation } from 'react-router-dom';
-import { navItems, quoteRequestUrl, serviceSummaries, siteContact } from '../data/siteContent';
+import { complianceLinkUrl, navItems, quoteRequestUrl, serviceSummaries, siteContact } from '../data/siteContent';
 
 function isNavActive(pathname: string, target: string) {
   if (target === '/') {
@@ -69,12 +69,18 @@ export default function Navbar() {
                 </Link>
               );
             })}
-            <div className="ml-4 pl-4 border-l border-slate-200/50 h-8 flex items-center">
+            <div className="ml-4 pl-4 gap-2 border-l border-slate-200/50 h-8 flex items-center">
               <button
                 onClick={() => window.open(quoteRequestUrl, '_blank', 'noopener,noreferrer')}
                 className="bg-primary hover:bg-slate-800 text-white text-sm font-black uppercase tracking-widest px-7 py-3 rounded-full transition-all shadow-xl hover:shadow-primary/20 transform hover:-translate-y-0.5 active:scale-95"
               >
                 Get Free Quote
+              </button>
+              <button
+                onClick={() => window.open(complianceLinkUrl, '_blank', 'noopener,noreferrer')}
+                className="bg-primary hover:bg-slate-800 text-white text-sm font-black uppercase tracking-widest px-7 py-3 rounded-full transition-all shadow-xl hover:shadow-primary/20 transform hover:-translate-y-0.5 active:scale-95"
+              >
+                Compliance Link
               </button>
             </div>
           </div>

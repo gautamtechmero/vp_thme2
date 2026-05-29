@@ -154,6 +154,8 @@ export type ScheduleItem = {
 export const quoteRequestUrl =
   'https://clienthub.getjobber.com/hubs/973e942c-b042-467b-b58a-14fc8d22ca11/public/requests/1578007/new?source=social_media';
 
+export const complianceLinkUrl = 'https://compliance.vpsclean.ca';
+
 export const navItems: NavItem[] = [
   { label: 'Home', path: '/' },
   { label: 'About', path: '/about' },
