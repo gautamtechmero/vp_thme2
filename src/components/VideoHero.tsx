@@ -38,7 +38,7 @@ export default function VideoHero() {
           </h1>
 
           {homeContent.hero.subtitle ? (
-            <p className="mb-5 text-xl font-display font-bold text-secondary md:text-2xl">
+            <p className="mb-5 text-xl font-display font-bold text-secondary md:text-2xl tracking-wide">
               {homeContent.hero.subtitle}
             </p>
           ) : null}
